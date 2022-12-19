@@ -4,7 +4,9 @@
  */
 package rentacarlista;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -13,9 +15,7 @@ import java.util.Scanner;
  */
 public class CatalogoClientes {
 
-    private int numeroClientes;
-
-    private Clientes[] listaClientes;
+    private List<Clientes> lista2;
 
     //EL constructor recibe el tamaño del catalogo e inicializa la estructura
     // de datos con vehiculos aleatorios
@@ -23,14 +23,12 @@ public class CatalogoClientes {
 
         tamanio = Math.abs(tamanio); //el tamaño dle constructor
 
-        this.numeroClientes = tamanio; //va a ser el numeor de vehiculo
-
-        this.listaClientes = new Clientes[tamanio];
-
+        this.lista2 = new ArrayList<>(tamanio);
+        
         //Una vez  creada la estructura de datos le doy valor a cada elemento
-        for (int i = 0; i < listaClientes.length; i++) {
+        for (int i = 0; i < tamanio; i++) {
 
-            this.listaClientes[i] = new Clientes();
+            this.lista2.add(new Clientes());
 
         }
 
@@ -40,13 +38,10 @@ public class CatalogoClientes {
 
         String tmp = "";
 
-        for (Clientes c : listaClientes) {
-
-            if (c != null) {
+        for (Clientes c : this.lista2) {
 
                 tmp += c.toString() + "\n";
 
-            }
         }
 
         return tmp;
@@ -54,33 +49,7 @@ public class CatalogoClientes {
 
     public void añadirClientes(Clientes c) {
 
-        //Si hay hueco se inserta en el hueco
-        if (this.numeroClientes < this.listaClientes.length) {
-
-            for (int i = 0; i < this.listaClientes.length; i++) {
-
-                if (this.listaClientes[i] == null) {
-
-                    this.listaClientes[i] = c;
-                    this.numeroClientes++;
-
-                    System.out.println("Guardando clientes en la posicion" + i);
-                    break;
-
-                }
-
-            }
-
-        } else { //SI NO , METO UN ESPACIO MAS 
-
-            this.numeroClientes++;//SUMA UN ESPACIO AL CATALOGO
-
-            this.listaClientes = Arrays.copyOf(listaClientes, this.numeroClientes);
-//          this.listaVehiculos = Arrays.copyOf(listaClientes, this.numeroClientes*2); //ARRAY NUEVO CON EL DOBLE DE ESPACIOS QUE EL ANTERIOR
-
-            this.listaClientes[this.numeroClientes - 1] = c;
-
-        }
+       this.lista2.add(c);
 
     }
 
@@ -89,26 +58,26 @@ public class CatalogoClientes {
         Clientes aux = new Clientes();
         aux.setNif(nif);
         int posicion = buscarClientes(aux);
-        return (posicion >= 0) ? this.listaClientes[posicion] : null; //Si la posicion es menor que 0 devolvera false
+        return (posicion >= 0) ? this.lista2.get(posicion) : null; //Si la posicion es menor que 0 devolvera false
 
     }
 
     public int getNumeroClientes() { //me dice el numero de clientes que hay en el catalogo NO EL TAMAÑO
-        return numeroClientes;
+        return this.lista2.size();
     }
 
-    public Clientes[] getListaClientes() {
-        return listaClientes;
+    public List<Clientes> getLista2() {
+        return lista2;
     }
 
+    
     public boolean borrarclientes(Clientes c) {
 
         int pos = buscarClientes(c);
 
         if (pos >= 0) {
 
-            this.listaClientes[pos] = null; //Es como borrarlo
-            this.numeroClientes--;
+            this.lista2.remove(pos);
             return true; //SI encuentra y borra el cliente existosamente devuelve true
         }
 
@@ -121,11 +90,11 @@ public class CatalogoClientes {
 
         if (c != null) {
 
-            for (int i = 0; i < this.listaClientes.length; i++) {
+            for (int i = 0; i < this.lista2.size(); i++) {
 
                 //MIRA SI EL CLIENTE QUE LE PASO ES IGUAL A UNO DEL ARRAY
                 //LE PUSIMOS QUE MIRE EL BASTIDOR
-                if (this.listaClientes[i] != null && c.equals(this.listaClientes[i])) {
+                if (c.equals(this.lista2.get(i))) {
 
                     return i;
                 }

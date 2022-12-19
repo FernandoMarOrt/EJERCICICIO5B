@@ -47,15 +47,7 @@ public class EjemploClientes {
 //        System.out.println("El cliente buscado esta en la posicion: " + lugarCliente);
         
         
-        
-        //borrar un cliente especifico del catalogo
-        System.out.println("");
-
-        System.out.println("Borrar cliente");
-
-        System.out.println("*******************************************************");
-
-        catalogoC.borrarclientes(catalogoC.getListaClientes()[10]);
+ 
 
         System.out.println("Cantidad de clientes despues de borrar un cliente: " + catalogoC.getNumeroClientes());
         System.out.println("");

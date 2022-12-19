@@ -5,7 +5,9 @@
 package rentacarlista;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -14,9 +16,7 @@ import java.util.Scanner;
  */
 public class CatalogoAlquileres {
 
-    private int numeroAlquileres;
-
-    private Alquiler[] listaAlquileres;
+    private List<Alquiler> lista3;
 
     //EL constructor recibe el tamaño del catalogo e inicializa la estructura
     // de datos con vehiculos aleatorios
@@ -24,69 +24,30 @@ public class CatalogoAlquileres {
 
         tamanio = Math.abs(tamanio); //el tamaño dle constructor
 
-        this.numeroAlquileres = 0; //va a ser el numeor de vehiculo
-
-        this.listaAlquileres = new Alquiler[tamanio];
+        this.lista3 = new ArrayList<>(tamanio);
 
 
 
     }
     
     
-
-
     public String toString() {
 
         String tmp = "";
 
-        for (Alquiler a : listaAlquileres) {
-            
-            if (a != null) {
+        for (Alquiler a : this.lista3) {
                 
                 tmp += a.toString() + "\n";
-
-            }
         }
 
         return tmp;
     }
     
-    
-    
-    
+     
     
     public void añadirAlquiler(Alquiler a) {
         
-        //Si hay hueco se inserta en el hueco
-        if(this.numeroAlquileres < this.listaAlquileres.length) {
-            
-            for (int i = 0; i < this.listaAlquileres.length; i++) {
-                
-                
-                if(this.listaAlquileres[i] ==  null){
-                    
-                    this.listaAlquileres[i] = a;
-                    this.numeroAlquileres++;
-                    
-
-                    break;
-                    
-                } 
-                
-                
-            }
-            
-        } else { //SI NO , METO UN ESPACIO MAS 
-            
-            this.numeroAlquileres++;//SUMA UN ESPACIO AL CATALOGO
-            
-            this.listaAlquileres = Arrays.copyOf(listaAlquileres, this.numeroAlquileres); 
-//          this.listaVehiculos = Arrays.copyOf(listaAlquileres, this.numeroAlquileres*2); //ARRAY NUEVO CON EL DOBLE DE ESPACIOS QUE EL ANTERIOR
-
-            this.listaAlquileres[this.numeroAlquileres-1] = a;
-            
-        }
-        
+        this.lista3.add(a);
         
     }
     
@@ -94,15 +55,18 @@ public class CatalogoAlquileres {
     public Alquiler buscarAlquiler(int id){
         
         Alquiler aux = new Alquiler();
+        
         aux.setAlquilerID(id);
+        
         int posicion = buscarAlquiler(aux);
-        return (posicion>=0)?this.listaAlquileres[posicion]:null; //Si la posicion es menor que 0 devolvera false
+        
+        return (posicion>=0)? this.lista3.get(posicion) : null; //Si la posicion es menor que 0 devolvera false
         
     }
     
 
     public int getNumeroAlquileres() { //me dice el numero de clientes que hay en el catalogo NO EL TAMAÑO
-        return numeroAlquileres;
+        return this.lista3.size();
     }
 
     public Alquiler[] getListaAlquileres() {
