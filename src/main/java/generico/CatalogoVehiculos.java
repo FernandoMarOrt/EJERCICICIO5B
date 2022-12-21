@@ -8,12 +8,24 @@ package generico;
  *
  * @author fer
  */
-public class Newclass extends CatalogoG {
+public class CatalogoVehiculos extends CatalogoG<Vehiculo> {
 
-    public Newclass(int tamanio) {
+    public CatalogoVehiculos(int tamanio) {
         super(tamanio);
     }
+
+    //PONER BUSCAR VEHICULO 
     
+    // Y CONSTRUCTOR CREANDO CTALOGO
+    
+    public Vehiculo buscarVehiculo(String bastidor) {
+        // 
+        Vehiculo aux = new Vehiculo();
+        aux.setBastidor(bastidor); //
+        int posicion = this.buscarElemento(aux);
+
+        return (posicion >= 0) ? this.lista.get(posicion) : null;
+    }
     
     
 }
