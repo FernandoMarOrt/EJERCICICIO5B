@@ -86,7 +86,7 @@ public class Empresa {
     }
 
     public void registrarCliente(Clientes c) {
-        this.CatalogoC.añadirClientes(c);
+        this.CatalogoC.añadirElemento(c);
     }
 
     public void buscarCliente(Clientes c) {
@@ -112,7 +112,7 @@ public class Empresa {
     }
 
     public void registrarVehiculo(Vehiculo v) {
-        this.CatalogoV.añadirVehiculo(v);
+       this.CatalogoV.añadirElemento(v);
     }
     
     public void registrarAlquiler(Alquiler a) {

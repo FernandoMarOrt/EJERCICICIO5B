@@ -8,7 +8,7 @@ package generico;
  *
  * @author fer
  */
-public class CatalogoVehiculos extends CatalogoG<Vehiculo> {
+public class CatalogoVehiculos extends CatalogoGenerico<Vehiculo> {
 
     public CatalogoVehiculos(int tamanio) {
         super(tamanio);
@@ -18,6 +18,8 @@ public class CatalogoVehiculos extends CatalogoG<Vehiculo> {
     
     // Y CONSTRUCTOR CREANDO CTALOGO
     
+    
+    //Se pone en esta clase ya que es unico y no generico
     public Vehiculo buscarVehiculo(String bastidor) {
         // 
         Vehiculo aux = new Vehiculo();
@@ -26,6 +28,8 @@ public class CatalogoVehiculos extends CatalogoG<Vehiculo> {
 
         return (posicion >= 0) ? this.lista.get(posicion) : null;
     }
+    
+    
     
     
 }
