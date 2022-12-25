@@ -103,6 +103,10 @@ public class CatalogoGenerico<T> {
 
     }
 
+    public List<T> getLista() {//Poner get lista para que el sea claro el funcionamiento
+        
+        return lista;
+    }
 
     
 }

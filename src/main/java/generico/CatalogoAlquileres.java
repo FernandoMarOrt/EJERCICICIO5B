@@ -4,100 +4,68 @@
  */
 package generico;
 
-import rentacarlista.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-
 /**
  *
- * @author Fer
+ * @author Usuario
  */
-public class CatalogoAlquileres {
+public class CatalogoAlquileres extends CatalogoGenerico<Alquiler> {
 
-    private List<Alquiler> lista3;
-
-    //EL constructor recibe el tamaño del catalogo e inicializa la estructura
-    // de datos con vehiculos aleatorios
     public CatalogoAlquileres(int tamanio) {
-
-        tamanio = Math.abs(tamanio); //el tamaño dle constructor
-
-        this.lista3 = new ArrayList<>(tamanio);
-
+        
+        super(tamanio);
     }
 
-    public String toString() {
-
-        String tmp = "";
-
-        for (Alquiler a : this.lista3) {
-
-            tmp += a.toString() + "\n";
-        }
-
-        return tmp;
-    }
-
-    public void añadirAlquiler(Alquiler a) {
-
-        this.lista3.add(a);
-
-    }
-
-    public Alquiler buscarAlquiler(int id) {
-
+    public Alquiler buscarAlquiler(int alquilerID) {
+        
         Alquiler aux = new Alquiler();
+        
+        aux.setAlquilerID(alquilerID); 
+        
+        int posicion = this.buscarElemento(aux);
 
-        aux.setAlquilerID(id);
-
-        int posicion = buscarAlquiler(aux);
-
-        return (posicion >= 0) ? this.lista3.get(posicion) : null; //Si la posicion es menor que 0 devolvera false
-
+        return (posicion >= 0) ? this.lista.get(posicion) : null;
+        
     }
 
-    public int getNumeroAlquileres() { //me dice el numero de clientes que hay en el catalogo NO EL TAMAÑO
-        return this.lista3.size();
-    }
+    
+    
+    //METODO DEL EJERCICIO 5C PARA SABER SI EL CLIENTE TIENE ALGUN ALQUILER
+    public boolean ClienteTieneAlquiler(String nif) {
 
-    public List<Alquiler> getListaAlquileres() {
-        return lista3;
-    }
+        boolean clienteTieneAlquiler = false;
 
-    public boolean borrarAlquiler(Alquiler a) {
+        for (int i = 0; i < lista.size(); i++) {
 
-        int pos = buscarAlquiler(a);
+            //busco en la lista si el nif que le he pasado coincide con alguno
+            //de los que hay en alquileres si es asi asigno al booleano true 
+            //para que me indice que si hay un alquiler asociado al cliente pasado
+            if (lista.get(i).getClientes().getNif().equals(nif)) {
 
-        if (pos >= 0) {
-            this.lista3.remove(pos);
-            return true; //SI encuentra y borra el cliente existosamente devuelve true
-        }
-
-        return false; //Si no consigue borrarlo devuelve false
-
-    }
-
-    //ESTO ES UNA BUSQUEDA SECUENCIAL
-    private int buscarAlquiler(Alquiler a) {
-
-        if (a != null) {
-
-            for (int i = 0; i < this.lista3.size(); i++) {
-
-                //MIRA SI EL CLIENTE QUE LE PASO ES IGUAL A UNO DEL ARRAY
-                //LE PUSIMOS QUE MIRE EL BASTIDOR
-                if (a.equals(this.lista3.get(i))) {
-
-                    return i;
-                }
+                clienteTieneAlquiler = true;
 
             }
         }
 
-        return -1;
+        return clienteTieneAlquiler;
+    }
+
+     //METODO DEL EJERCICIO 5C PARA SABER SI EL VEHICULO TIENE ALGUN ALQUILER
+    public boolean VehiculoTieneAlquiler(String bastidor) {
+
+        boolean vehiculoTieneAlquiler = false;
+        
+        for (int i = 0; i < lista.size(); i++) {
+
+            //busco en la lista si el bastidor que le he pasado coincide con alguno
+            //de los que hay en alquileres si es asi asigno al booleano true 
+            //para que me indice que si hay un alquiler asociado al vehiculo pasado
+            if (lista.get(i).getVehiculo().getBastidor().equals(bastidor)) {
+                vehiculoTieneAlquiler = true;
+
+            }
+        }
+        
+        return vehiculoTieneAlquiler;
 
     }
 
